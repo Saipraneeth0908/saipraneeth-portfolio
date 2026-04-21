@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Kaiser ETL Architecture</title>
+  <desc id="desc">Healthcare ETL architecture connecting survey, CRM, and platform data into validation, transformation, marts, and BI reporting.</desc>
+  <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2 2l8 4-8 4z" fill="#5ff6e8"/></marker></defs>
+  <rect width="1200" height="760" rx="28" fill="#07101b"/>
+  <text x="64" y="82" fill="#f4f7fb" font-family="Inter,Arial" font-size="34" font-weight="700">Integrated Member Analytics ETL</text>
+  <text x="64" y="118" fill="#a9b4c7" font-family="Inter,Arial" font-size="18">Multi-source healthcare data prepared for churn, satisfaction, and reporting</text>
+  <g fill="#111c31" stroke="#33415f" stroke-width="2" font-family="Inter,Arial">
+    <rect x="70" y="214" width="190" height="104" rx="14"/><rect x="70" y="360" width="190" height="104" rx="14"/><rect x="70" y="506" width="190" height="104" rx="14"/>
+    <rect x="360" y="306" width="190" height="146" rx="14"/><rect x="646" y="306" width="190" height="146" rx="14"/><rect x="930" y="214" width="190" height="104" rx="14"/><rect x="930" y="506" width="190" height="104" rx="14"/>
+  </g>
+  <g font-family="Inter,Arial"><g fill="#f4f7fb" font-size="20" font-weight="700"><text x="110" y="272">Survey Data</text><text x="122" y="418">CRM Data</text><text x="98" y="564">Platform Logs</text><text x="394" y="370">Staging</text><text x="674" y="370">Transform</text><text x="970" y="272">Analytics Mart</text><text x="982" y="564">Tableau BI</text></g><g fill="#a9b4c7" font-size="14"><text x="394" y="404">schema checks</text><text x="394" y="426">quality rules</text><text x="674" y="404">member keys</text><text x="674" y="426">metric logic</text></g></g>
+  <g stroke="#5ff6e8" stroke-width="4" fill="none" marker-end="url(#arrow)"><path d="M262 266C310 266 318 378 352 378"/><path d="M262 412h90"/><path d="M262 558C310 558 318 380 352 380"/><path d="M552 380h86"/><path d="M838 380C888 380 884 266 922 266"/><path d="M838 380C888 380 884 558 922 558"/></g>
+  <path d="M164 656h876" stroke="#9b8cff" stroke-width="3" stroke-dasharray="10 14"/>
+  <text x="414" y="696" fill="#a9b4c7" font-family="Inter,Arial" font-size="16">Validation, lineage, and reporting refresh controls</text>
+</svg>

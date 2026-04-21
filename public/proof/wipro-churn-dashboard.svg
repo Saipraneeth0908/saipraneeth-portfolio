@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Wipro Customer Churn Dashboard</title>
+  <desc id="desc">Dark Power BI-style customer churn dashboard with KPI tiles, line chart, segment bars, and risk table.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#07101f"/><stop offset="1" stop-color="#10192f"/></linearGradient>
+    <linearGradient id="blue" x1="0" x2="1"><stop stop-color="#36c5f0"/><stop offset="1" stop-color="#e6b86a"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="760" rx="28" fill="url(#bg)"/>
+  <path d="M0 94h1200M0 188h1200M0 282h1200M0 376h1200M0 470h1200M0 564h1200M0 658h1200M120 0v760M240 0v760M360 0v760M480 0v760M600 0v760M720 0v760M840 0v760M960 0v760M1080 0v760" stroke="#ffffff" stroke-opacity=".035"/>
+  <text x="54" y="70" fill="#f4f7fb" font-family="Inter,Arial" font-size="34" font-weight="700">Customer Churn Intelligence</text>
+  <text x="54" y="106" fill="#a9b4c7" font-family="Inter,Arial" font-size="17">Banking retention, risk segments, and customer behavior signals</text>
+  <g transform="translate(54 142)">
+    <g fill="#111c31" stroke="#2d405d"><rect width="245" height="118" rx="12"/><rect x="275" width="245" height="118" rx="12"/><rect x="550" width="245" height="118" rx="12"/><rect x="825" width="245" height="118" rx="12"/></g>
+    <g font-family="Inter,Arial"><text x="24" y="38" fill="#a9b4c7" font-size="15">Churn risk</text><text x="24" y="82" fill="#36c5f0" font-size="40" font-weight="700">18.6%</text><text x="299" y="38" fill="#a9b4c7" font-size="15">High value at risk</text><text x="299" y="82" fill="#e6b86a" font-size="40" font-weight="700">42K</text><text x="574" y="38" fill="#a9b4c7" font-size="15">Retention lift</text><text x="574" y="82" fill="#69db9c" font-size="40" font-weight="700">+7.4%</text><text x="849" y="38" fill="#a9b4c7" font-size="15">Model score band</text><text x="849" y="82" fill="#f4f7fb" font-size="40" font-weight="700">A-</text></g>
+  </g>
+  <g transform="translate(54 304)">
+    <rect width="660" height="352" rx="16" fill="#101a2e" stroke="#2d405d"/>
+    <text x="28" y="44" fill="#f4f7fb" font-family="Inter,Arial" font-size="21" font-weight="700">Churn Movement by Month</text>
+    <path d="M44 280H622M44 216H622M44 152H622M44 88H622" stroke="#fff" stroke-opacity=".06"/>
+    <path d="M58 260C128 220 158 234 218 196S330 126 398 142 492 218 620 76" fill="none" stroke="#36c5f0" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
+    <path d="M58 286C130 264 172 246 234 252S334 292 410 248 512 156 620 132" fill="none" stroke="#e6b86a" stroke-width="4" stroke-linecap="round"/>
+    <g fill="#36c5f0"><circle cx="58" cy="260" r="7"/><circle cx="218" cy="196" r="7"/><circle cx="398" cy="142" r="7"/><circle cx="620" cy="76" r="7"/></g>
+  </g>
+  <g transform="translate(760 304)">
+    <rect width="386" height="352" rx="16" fill="#101a2e" stroke="#2d405d"/>
+    <text x="26" y="44" fill="#f4f7fb" font-family="Inter,Arial" font-size="21" font-weight="700">Risk Segments</text>
+    <g font-family="Inter,Arial" font-size="14" fill="#a9b4c7">
+      <text x="28" y="96">Dormant affluent</text><rect x="180" y="78" width="154" height="22" rx="5" fill="#36c5f0"/>
+      <text x="28" y="146">Fee-sensitive</text><rect x="180" y="128" width="116" height="22" rx="5" fill="#e6b86a"/>
+      <text x="28" y="196">New cardholder</text><rect x="180" y="178" width="84" height="22" rx="5" fill="#9b8cff"/>
+      <text x="28" y="246">Low engagement</text><rect x="180" y="228" width="138" height="22" rx="5" fill="#5ff6e8"/>
+      <text x="28" y="296">Service friction</text><rect x="180" y="278" width="172" height="22" rx="5" fill="#ef7b7b"/>
+    </g>
+  </g>
+</svg>

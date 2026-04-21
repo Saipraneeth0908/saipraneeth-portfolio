@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Info Edge Patient Lookup Workspace</title>
+  <desc id="desc">Patient lookup dashboard concept with OCR validation status and extracted records.</desc>
+  <rect width="1200" height="760" rx="28" fill="#090d1d"/>
+  <circle cx="980" cy="120" r="230" fill="#9b8cff" opacity=".13"/><circle cx="170" cy="620" r="260" fill="#5ff6e8" opacity=".09"/>
+  <text x="58" y="76" fill="#f4f7fb" font-family="Inter,Arial" font-size="34" font-weight="700">Patient Lookup Workspace</text>
+  <rect x="58" y="124" width="1084" height="82" rx="14" fill="#111c31" stroke="#33415f"/>
+  <text x="86" y="174" fill="#a9b4c7" font-family="Inter,Arial" font-size="20">Search by patient ID, document date, hospital, or exception status</text>
+  <g fill="#111c31" stroke="#33415f"><rect x="58" y="248" width="320" height="380" rx="16"/><rect x="414" y="248" width="728" height="380" rx="16"/></g>
+  <g font-family="Inter,Arial"><text x="86" y="298" fill="#f4f7fb" font-size="22" font-weight="700">OCR Status</text><text x="446" y="298" fill="#f4f7fb" font-size="22" font-weight="700">Extracted Records</text></g>
+  <g transform="translate(88 340)" font-family="Inter,Arial" font-size="16"><circle cx="40" cy="40" r="40" fill="none" stroke="#5ff6e8" stroke-width="12"/><text x="96" y="36" fill="#f4f7fb" font-size="28" font-weight="700">91%</text><text x="96" y="66" fill="#a9b4c7">validated fields</text><rect y="120" width="240" height="16" rx="8" fill="#1d2940"/><rect y="120" width="196" height="16" rx="8" fill="#9b8cff"/><rect y="170" width="240" height="16" rx="8" fill="#1d2940"/><rect y="170" width="158" height="16" rx="8" fill="#5ff6e8"/></g>
+  <g transform="translate(446 342)" font-family="Inter,Arial" font-size="15" fill="#a9b4c7">
+    <text x="0" y="0" fill="#7d8799">PATIENT</text><text x="150" y="0" fill="#7d8799">HOSPITAL</text><text x="330" y="0" fill="#7d8799">FIELD</text><text x="500" y="0" fill="#7d8799">STATUS</text>
+    <path d="M0 24h620M0 82h620M0 140h620M0 198h620" stroke="#ffffff" stroke-opacity=".08"/>
+    <text y="58" fill="#f4f7fb">P-20491</text><text x="150" y="58">North Clinic</text><text x="330" y="58">diagnosis</text><text x="500" y="58" fill="#69db9c">verified</text>
+    <text y="116" fill="#f4f7fb">P-39118</text><text x="150" y="116">Metro Health</text><text x="330" y="116">date</text><text x="500" y="116" fill="#e6b86a">review</text>
+    <text y="174" fill="#f4f7fb">P-55124</text><text x="150" y="174">Care Point</text><text x="330" y="174">provider</text><text x="500" y="174" fill="#69db9c">verified</text>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Kaiser Member Churn and Satisfaction Dashboard</title>
+  <desc id="desc">Tableau-style healthcare member dashboard with churn, satisfaction drivers, map-like clusters, and trend visualizations.</desc>
+  <rect width="1200" height="760" rx="28" fill="#07101b"/>
+  <path d="M0 610C210 570 280 636 456 592S740 462 1200 520v240H0z" fill="#5ff6e8" opacity=".08"/>
+  <text x="58" y="78" fill="#f4f7fb" font-family="Inter,Arial" font-size="34" font-weight="700">Member Churn & Satisfaction</text>
+  <text x="58" y="114" fill="#a9b4c7" font-family="Inter,Arial" font-size="18">Integrated healthcare reporting for retention and experience signals</text>
+  <g fill="#111c31" stroke="#33415f"><rect x="58" y="152" width="246" height="116" rx="14"/><rect x="330" y="152" width="246" height="116" rx="14"/><rect x="602" y="152" width="246" height="116" rx="14"/><rect x="874" y="152" width="246" height="116" rx="14"/></g>
+  <g font-family="Inter,Arial"><text x="84" y="196" fill="#a9b4c7" font-size="15">Member churn</text><text x="84" y="236" fill="#5ff6e8" font-size="38" font-weight="700">12.8%</text><text x="356" y="196" fill="#a9b4c7" font-size="15">Satisfaction</text><text x="356" y="236" fill="#69db9c" font-size="38" font-weight="700">84.2</text><text x="628" y="196" fill="#a9b4c7" font-size="15">At-risk members</text><text x="628" y="236" fill="#9b8cff" font-size="38" font-weight="700">31K</text><text x="900" y="196" fill="#a9b4c7" font-size="15">Reporting cadence</text><text x="900" y="236" fill="#f4f7fb" font-size="38" font-weight="700">M+W</text></g>
+  <g fill="#111c31" stroke="#33415f"><rect x="58" y="312" width="520" height="306" rx="16"/><rect x="620" y="312" width="500" height="306" rx="16"/></g>
+  <path d="M94 552C174 512 218 470 284 486S382 556 528 376" fill="none" stroke="#5ff6e8" stroke-width="6" stroke-linecap="round"/>
+  <path d="M94 578C190 548 238 536 312 548S442 508 528 462" fill="none" stroke="#9b8cff" stroke-width="4" stroke-linecap="round"/>
+  <g transform="translate(666 374)" fill="#5ff6e8" opacity=".8"><circle cx="70" cy="70" r="42"/><circle cx="200" cy="52" r="28"/><circle cx="310" cy="122" r="54"/><circle cx="120" cy="196" r="36"/><circle cx="248" cy="220" r="24"/></g>
+  <g transform="translate(666 374)" fill="none" stroke="#fff" stroke-opacity=".18"><path d="M70 70l130-18 110 70-190 74 128 24"/><path d="M200 52l48 168"/></g>
+</svg>
