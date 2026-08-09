@@ -1,49 +1,51 @@
 export const profile = {
   name: "Sai Praneeth Kamishetty",
-  title: "Risk Adjustment Data Scientist",
-  location: "Overland Park, KS",
-  email: "saipraneethk2002@gmail.com",
-  phone: "+1 (850) 405-4171",
-  resumeHref: "/resume/sai-praneeth-kamishetty-resume.pdf",
-  summary:
-    "Data professional with about five years of experience across healthcare and banking, working from raw ingestion and ETL through analysis, modeling, dashboards, and stakeholder-ready decision support.",
+  title: "Applied Generative AI Engineer",
+  tagline:
+    "Building retrieval systems, AI agents, conversational applications, and production-oriented GenAI workflows.",
+  location: "Tallahassee, Florida",
+  relocation: "Open to relocation",
+  email: "saipraneethkamishetty850@gmail.com",
+  github: "https://github.com/Saipraneeth0908",
+  linkedin: "https://www.linkedin.com/in/sai-praneeth-kamishetty-00b35b2b3/",
+  resumePath: "/resume/sai-praneeth-kamishetty-resume.pdf",
 };
 
-export const experienceTimeline = [
+export const about = [
+  "I design and build LLM-powered applications: retrieval-augmented generation systems, semantic retrieval pipelines, conversational interfaces, and intelligent automation workflows.",
+  "My work combines Python and FastAPI backend development with embeddings-based retrieval, metadata filtering, contextual memory, structured outputs, tool calling, and AI workflow orchestration.",
+  "I also work across machine learning, NLP, data engineering, analytics, and cloud-oriented development. The focus is practical AI systems that improve information access, operational decision-making, automation, and productivity.",
+];
+
+export const focusAreas = [
   {
-    company: "Kaiser Permanente",
-    role: "Strategy Analyst",
-    period: "Dec 2024 - Present",
+    title: "Retrieval",
     detail:
-      "Stepped into a live U.S. healthcare analytics environment, learned the CMS, Medicare, and member experience context quickly, and built ETL, modeling, and dashboard workflows around satisfaction and churn.",
+      "Embeddings, chunking strategies, metadata-aware filtering, and context assembly that keeps answers grounded.",
   },
   {
-    company: "Info Edge",
-    role: "Database Management Analyst",
-    period: "Dec 2021 - Aug 2023",
+    title: "Agents & orchestration",
     detail:
-      "Moved deeper into healthcare and complex domain data, working on patient record digitization, OCR extraction, structuring, dashboarding, and cross-functional delivery.",
+      "Planning loops, tool calling, contextual memory, and structured outputs wired into real backend services.",
   },
   {
-    company: "Wipro",
-    role: "Data Analyst",
-    period: "May 2020 - Dec 2021",
+    title: "Production backends",
     detail:
-      "Built the foundation in a centralized data team with exposure to the full lifecycle, from ingestion and ETL to analytics, visualization, stakeholder conversations, and multi-domain problem solving.",
+      "Python and FastAPI services, ETL pipelines, and validation layers that keep AI workflows reliable.",
   },
 ];
 
 export const education = [
   {
     school: "Florida State University",
-    degree: "Master of Science, Data Science (Computer Science)",
-    period: "May 2025",
-    detail: "GPA: 3.89",
+    degree: "Master of Science, Data Science",
+    detail: "Computer Science and Artificial Intelligence concepts",
+    gpa: "3.89",
   },
   {
     school: "VNR Vignana Jyothi Institute of Engineering and Technology",
     degree: "Bachelor of Technology, Electrical and Electronics Engineering",
-    period: "May 2023",
-    detail: "GPA: 3.68",
+    detail: "",
+    gpa: "3.68",
   },
 ];

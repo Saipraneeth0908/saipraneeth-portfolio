@@ -6,35 +6,37 @@ const config: Config = {
     extend: {
       colors: {
         ink: {
-          base: "#070b14",
-          deep: "#0b1020",
-          surface: "#11182a",
-          raised: "#162033",
-          line: "#263247",
+          base: "#0a0b0f",
+          surface: "#101219",
+          raised: "#161923",
+          line: "#242835",
         },
         copy: {
-          primary: "#f4f7fb",
-          secondary: "#a9b4c7",
-          muted: "#7d8799",
+          primary: "#e9edf5",
+          secondary: "#a2abbd",
+          muted: "#767f92",
         },
         accent: {
-          blue: "#36c5f0",
-          cyan: "#5ff6e8",
-          violet: "#9b8cff",
-          green: "#69db9c",
-          gold: "#e6b86a",
+          DEFAULT: "#4c9fff",
+          soft: "#8dc2ff",
+          dim: "rgba(76, 159, 255, 0.14)",
         },
-      },
-      boxShadow: {
-        glow: "0 0 34px rgba(54, 197, 240, 0.24)",
-        panel: "0 24px 80px rgba(0, 0, 0, 0.38)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
-      backgroundImage: {
-        "radial-grid":
-          "radial-gradient(circle at 20% 20%, rgba(54,197,240,.16), transparent 28%), radial-gradient(circle at 80% 10%, rgba(155,140,255,.14), transparent 25%), radial-gradient(circle at 50% 80%, rgba(95,246,232,.08), transparent 30%)",
+      maxWidth: {
+        prose: "68ch",
+      },
+      keyframes: {
+        "rise-in": {
+          from: { opacity: "0", transform: "translateY(12px)" },
+          to: { opacity: "1", transform: "none" },
+        },
+      },
+      animation: {
+        "rise-in": "rise-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both",
       },
     },
   },

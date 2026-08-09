@@ -1,34 +1,43 @@
-# Sai Praneeth Kamishetty Portfolio
+# Sai Praneeth Kamishetty — Portfolio
 
-Live site: [portfolio-henna-zeta-6a0662eupa.vercel.app](https://portfolio-henna-zeta-6a0662eupa.vercel.app)
+Live: [portfolio-henna-zeta-6a0662eupa.vercel.app](https://portfolio-henna-zeta-6a0662eupa.vercel.app)
 
-This is an immersive portfolio built with Next.js, TypeScript, Tailwind CSS, and Framer Motion to present Sai Praneeth Kamishetty's work across analytics, ETL, modeling, dashboards, OCR pipelines, and decision intelligence.
-
-## Highlights
-
-- Immersive one-page portfolio experience
-- Project worlds for Wipro, Info Edge, and Kaiser Permanente
-- Proof-of-work gallery with real project visuals
-- Resume download and contact details
-- Static case-study routes for each experience world
+Portfolio site for Sai Praneeth Kamishetty, Applied Generative AI Engineer: retrieval-augmented
+generation, semantic search, AI agents, conversational AI, and Python/FastAPI backends.
 
 ## Stack
 
-- Next.js
+- Next.js 15 (App Router, static export)
 - TypeScript
-- Tailwind CSS
-- Framer Motion
-- Lucide React
+- Tailwind CSS 3
+- Framer Motion (scroll reveals only)
+- lucide-react
 
-## Local Development
+## Structure
+
+```
+src/app/          layout, metadata, page shell, favicon
+src/components/   one component per section + shared Section/Reveal primitives
+src/content/      all copy lives here, separate from presentation
+src/lib/site.ts   canonical URL + basePath-aware asset() helper
+public/resume/    resume PDF served by the nav and contact CTAs
+```
+
+Content edits happen in `src/content/` — no JSX changes required.
+
+## Develop
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:3000
+npm run lint
+npm run build    # static export to ./out
 ```
 
-Open `http://127.0.0.1:3000`
+## Deploy
 
-## Production
+`.github/workflows/deploy-pages.yml` builds and publishes `./out` to GitHub Pages on every push to
+`main`. When `GITHUB_ACTIONS=true`, `next.config.ts` applies the `/saipraneeth-portfolio` basePath
+and exposes it as `NEXT_PUBLIC_BASE_PATH` so plain `<a href>` links to `public/` assets resolve.
 
-This project is deployed on Vercel.
+If the canonical deployment moves, update `SITE_URL` in `src/lib/site.ts`.

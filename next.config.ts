@@ -1,14 +1,17 @@
 import type { NextConfig } from "next";
 
-const isGithubPages = process.env.GITHUB_ACTIONS === "true";
+const basePath = process.env.GITHUB_ACTIONS === "true" ? "/saipraneeth-portfolio" : "";
 
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
-  basePath: isGithubPages ? "/saipraneeth-portfolio" : "",
-  assetPrefix: isGithubPages ? "/saipraneeth-portfolio/" : "",
+  basePath,
+  assetPrefix: basePath ? `${basePath}/` : "",
+  env: {
+    // Exposed so plain <a href> links to public/ assets resolve under basePath.
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   images: {
-    formats: ["image/avif", "image/webp"],
     unoptimized: true,
   },
 };

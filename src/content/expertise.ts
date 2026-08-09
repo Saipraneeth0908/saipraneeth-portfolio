@@ -1,0 +1,110 @@
+export type ExpertiseGroup = {
+  title: string;
+  blurb: string;
+  icon: "sparkles" | "search" | "server" | "chart" | "rocket" | "wrench";
+  items: string[];
+};
+
+export const expertise: ExpertiseGroup[] = [
+  {
+    title: "Generative AI",
+    blurb: "LLM application patterns from prompt to orchestrated agent.",
+    icon: "sparkles",
+    items: [
+      "LLM applications",
+      "Retrieval-augmented generation",
+      "Prompt engineering",
+      "Structured outputs",
+      "Tool calling",
+      "Context management",
+      "Prompt chaining",
+      "Conversational memory",
+      "AI agents",
+      "Agentic workflows",
+    ],
+  },
+  {
+    title: "Retrieval & NLP",
+    blurb: "Getting the right context in front of the model.",
+    icon: "search",
+    items: [
+      "Embeddings",
+      "Semantic search",
+      "Vector search",
+      "Metadata-aware retrieval",
+      "Chunking strategies",
+      "Context compression",
+      "Query optimization",
+      "Semantic similarity",
+      "Information retrieval",
+      "Text classification",
+      "NLP",
+    ],
+  },
+  {
+    title: "Backend & Data",
+    blurb: "The services and pipelines AI features actually run on.",
+    icon: "server",
+    items: [
+      "Python",
+      "SQL",
+      "FastAPI",
+      "REST APIs",
+      "Async workflows",
+      "PostgreSQL",
+      "Supabase",
+      "Snowflake",
+      "ETL pipelines",
+      "Data transformation",
+      "Structured & unstructured data",
+    ],
+  },
+  {
+    title: "ML & Analytics",
+    blurb: "Modeling and reporting that inform operational decisions.",
+    icon: "chart",
+    items: [
+      "Regression",
+      "Classification",
+      "Clustering",
+      "Forecasting",
+      "Statistical modeling",
+      "Feature engineering",
+      "Model evaluation",
+      "Exploratory data analysis",
+      "Power BI",
+      "Tableau",
+    ],
+  },
+  {
+    title: "Development & Deployment",
+    blurb: "Shipping and iterating without breaking things.",
+    icon: "rocket",
+    items: [
+      "Git & GitHub",
+      "GitHub Actions",
+      "Vercel",
+      "n8n",
+      "CI/CD",
+      "API integration",
+      "Cloud deployment",
+      "Rapid AI prototyping",
+    ],
+  },
+  {
+    title: "AI Frameworks & Tools",
+    blurb: "Day-to-day toolkit for building and testing AI systems.",
+    icon: "wrench",
+    items: [
+      "OpenAI APIs",
+      "Claude APIs",
+      "LangChain",
+      "LangGraph",
+      "Hugging Face Transformers",
+      "GitHub Copilot",
+      "Cursor",
+      "Codex",
+      "VS Code",
+    ],
+  },
+];
