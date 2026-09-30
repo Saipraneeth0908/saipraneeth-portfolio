@@ -1,12 +1,22 @@
 import { ArrowRight, Github, MapPin } from "lucide-react";
 import { profile } from "@/content/profile";
-import { RetrievalDiagram } from "@/components/retrieval-diagram";
+import { asset } from "@/lib/site";
+import { ScratchReveal } from "@/components/scratch-reveal";
 
 export function Hero() {
   return (
-    <section id="home" aria-labelledby="hero-title" className="scroll-mt-24 px-5 pb-20 pt-28 md:px-8 md:pb-28 md:pt-36">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-        <div>
+    <ScratchReveal
+      top={asset("/hero/top.png")}
+      bottom={asset("/hero/bottom.png")}
+      className="relative h-[100svh] w-full touch-pan-y overflow-hidden bg-ink-base"
+    >
+      <div
+        id="home"
+        aria-labelledby="hero-title"
+        role="region"
+        className="relative z-10 mx-auto flex h-full max-w-6xl items-end px-5 pb-8 pt-24 md:items-center md:px-8 md:pb-0"
+      >
+        <div className="max-w-md rounded-xl border border-ink-line bg-ink-base/80 p-6 backdrop-blur-md md:p-7">
           <p
             className="animate-rise-in font-mono text-xs uppercase tracking-[0.2em] text-accent"
             style={{ animationDelay: "40ms" }}
@@ -15,19 +25,19 @@ export function Hero() {
           </p>
           <h1
             id="hero-title"
-            className="animate-rise-in mt-5 text-4xl font-semibold leading-[1.08] tracking-tight text-copy-primary md:text-6xl"
+            className="animate-rise-in mt-4 text-3xl font-semibold leading-[1.08] tracking-tight text-copy-primary md:text-5xl"
             style={{ animationDelay: "100ms" }}
           >
             {profile.name}
           </h1>
           <p
-            className="animate-rise-in mt-6 max-w-prose text-lg leading-8 text-copy-secondary"
+            className="animate-rise-in mt-4 leading-7 text-copy-secondary md:text-lg"
             style={{ animationDelay: "160ms" }}
           >
             {profile.tagline}
           </p>
           <p
-            className="animate-rise-in mt-4 max-w-prose leading-7 text-copy-secondary"
+            className="animate-rise-in mt-3 text-sm leading-6 text-copy-secondary md:text-base md:leading-7"
             style={{ animationDelay: "200ms" }}
           >
             I work across embeddings-based retrieval, contextual memory, structured outputs, and
@@ -35,7 +45,7 @@ export function Hero() {
           </p>
 
           <div
-            className="animate-rise-in mt-9 flex flex-wrap items-center gap-3"
+            className="animate-rise-in mt-6 flex flex-wrap items-center gap-3"
             style={{ animationDelay: "260ms" }}
           >
             <a
@@ -57,7 +67,7 @@ export function Hero() {
           </div>
 
           <p
-            className="animate-rise-in mt-9 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-copy-muted"
+            className="animate-rise-in mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-copy-muted"
             style={{ animationDelay: "320ms" }}
           >
             <MapPin aria-hidden="true" className="h-3.5 w-3.5" />
@@ -66,14 +76,7 @@ export function Hero() {
             <span>{profile.relocation}</span>
           </p>
         </div>
-
-        <div
-          className="animate-rise-in rounded-xl border border-ink-line bg-ink-surface/60 p-5 md:p-7"
-          style={{ animationDelay: "220ms" }}
-        >
-          <RetrievalDiagram />
-        </div>
       </div>
-    </section>
+    </ScratchReveal>
   );
 }
