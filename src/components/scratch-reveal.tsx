@@ -147,11 +147,12 @@ export function ScratchReveal({
     let raf = 0;
 
     const drawCover = () => {
-      // Same math as object-fit: cover + object-position: center on the <img> below.
+      // Same math as object-fit: cover + object-position: 50% 25% on the <img> below
+      // (biased up so a wide viewport crops the table, not the head under the nav).
       const scale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
       const dw = img.naturalWidth * scale;
       const dh = img.naturalHeight * scale;
-      ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      ctx.drawImage(img, (W - dw) / 2, (H - dh) * 0.25, dw, dh);
     };
 
     const resize = () => {
@@ -306,7 +307,7 @@ export function ScratchReveal({
       <img
         src={bottom}
         alt=""
-        className={`absolute inset-0 h-full w-full object-cover object-center ${ready ? "" : "invisible"}`}
+        className={`absolute inset-0 h-full w-full object-cover object-[50%_25%] ${ready ? "" : "invisible"}`}
       />
       <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 h-full w-full" />
       {children}
