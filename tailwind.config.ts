@@ -25,6 +25,8 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+        dot: ["Doto", "var(--font-mono)", "monospace"],
       },
       maxWidth: {
         prose: "68ch",

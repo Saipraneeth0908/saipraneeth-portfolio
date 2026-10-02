@@ -18,6 +18,21 @@ const NAV = [
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
+  const [time, setTime] = useState("");
+
+  // Rendered after mount only, so static HTML and hydration agree.
+  useEffect(() => {
+    const fmt = new Intl.DateTimeFormat("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      timeZone: "America/New_York",
+    });
+    const tick = () => setTime(fmt.format(new Date()));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,6 +88,11 @@ export function SiteNav() {
           </ul>
 
           <div className="flex items-center gap-2">
+            {time ? (
+              <span className="mr-2 hidden font-mono text-xs tabular-nums text-copy-muted xl:inline">
+                TLH {time}
+              </span>
+            ) : null}
             <a
               href={resumeHref}
               target="_blank"
@@ -126,6 +146,7 @@ export function SiteNav() {
           </ul>
         ) : null}
       </nav>
+      <div aria-hidden="true" className="scroll-progress absolute inset-x-0 bottom-0 h-px bg-accent" />
     </header>
   );
 }

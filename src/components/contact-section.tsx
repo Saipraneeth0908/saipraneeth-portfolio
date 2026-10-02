@@ -1,8 +1,13 @@
-import { FileText, Github, Linkedin, Mail } from "lucide-react";
-import { Section } from "@/components/section";
-import { Reveal } from "@/components/reveal";
+"use client";
+
+import { useState, type CSSProperties } from "react";
+import { Check, Copy, FileText, Github, Linkedin } from "lucide-react";
+import { InView } from "@/components/motion";
+import { Grade, GradedVideo } from "@/components/graded-video";
+import { FILM } from "@/lib/films";
 import { profile } from "@/content/profile";
 import { asset } from "@/lib/site";
+import { Chapter } from "@/components/chapter";
 
 const OPEN_TO = [
   "Generative AI engineering roles",
@@ -10,71 +15,119 @@ const OPEN_TO = [
   "Backend AI application development",
   "Technical collaboration on retrieval and agent systems",
 ];
+const GLYPHS = ["<", "%", "*", "#"];
+const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
+/*
+ * Chapter 06 — intelligent-operations landing: film, ring-avatar trust row,
+ * dot-matrix headline, glowing CTA, and a four-column footer row.
+ */
 export function ContactSection() {
-  const links = [
-    { label: "Email", value: profile.email, href: `mailto:${profile.email}`, icon: Mail, external: false },
-    { label: "GitHub", value: "Saipraneeth0908", href: profile.github, icon: Github, external: true },
-    ...(profile.linkedin
-      ? [
-          {
-            label: "LinkedIn",
-            value: "Profile",
-            href: profile.linkedin,
-            icon: Linkedin,
-            external: true,
-          },
-        ]
-      : []),
-    {
-      label: "Resume",
-      value: "PDF",
-      href: asset(profile.resumePath),
-      icon: FileText,
-      external: true,
-    },
+  const [copied, setCopied] = useState(false);
+  const rings = [
+    { label: "GitHub", href: profile.github, icon: Github },
+    ...(profile.linkedin ? [{ label: "LinkedIn", href: profile.linkedin, icon: Linkedin }] : []),
+    { label: "Resume PDF", href: asset(profile.resumePath), icon: FileText },
   ];
 
-  return (
-    <Section
-      id="contact"
-      label="Contact"
-      title="Get in touch"
-      intro={`Based in ${profile.location} and open to relocation. The fastest way to reach me is email.`}
-    >
-      <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-        <Reveal>
-          <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-accent">Open to</h3>
-          <ul className="mt-4 space-y-2.5">
-            {OPEN_TO.map((item) => (
-              <li key={item} className="flex gap-3 text-sm leading-7 text-copy-secondary">
-                <span aria-hidden="true" className="mt-3 h-px w-3 shrink-0 bg-accent/60" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${profile.email}`;
+    }
+  };
 
-        <Reveal>
-          <ul className="grid gap-3 sm:grid-cols-2">
-            {links.map(({ label, value, href, icon: Icon, external }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="flex min-h-[76px] flex-col justify-center gap-1 rounded-lg border border-ink-line bg-ink-surface/50 px-5 py-4 transition-colors duration-200 hover:border-accent/50 hover:bg-accent-dim"
-                >
-                  <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-accent">
-                    <Icon aria-hidden="true" className="h-4 w-4" />
-                    {label}
-                  </span>
-                  <span className="break-all text-sm text-copy-secondary">{value}</span>
-                </a>
+  return (
+    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-ink-base">
+      <div aria-hidden="true" className="film-feather absolute inset-0 overflow-hidden">
+        <GradedVideo src={FILM.ops} />
+        <Grade scrim={0.4} />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.85)_0%,transparent_30%,transparent_60%,rgba(10,11,15,0.9)_100%)]"
+        />
+      </div>
+
+      <InView className="relative z-10 mx-auto flex min-h-[100svh] max-w-[920px] flex-col items-center px-[clamp(14px,3vw,32px)] pb-[clamp(16px,2.4vh,28px)] pt-28">
+        <div className="flex flex-1 flex-col items-center justify-center text-center">
+          <div className="fx-reveal inline-flex items-center [--ring:clamp(36px,4.5vw,42px)]" style={d(0.05)}>
+            {rings.map(({ label, href, icon: Icon }, i) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="relative grid h-[var(--ring)] w-[var(--ring)] place-items-center rounded-full border border-white/40 bg-ink-raised p-[5px] transition-transform duration-300 hover:-translate-y-1"
+                style={{ marginLeft: i ? "calc(var(--ring) * -0.42)" : 0, zIndex: i + 1 }}
+              >
+                <span className="grid h-full w-full place-items-center rounded-full bg-copy-primary text-ink-base">
+                  <Icon aria-hidden="true" className="h-[calc(var(--ring)*0.34)] w-[calc(var(--ring)*0.34)]" />
+                </span>
+              </a>
+            ))}
+            <span
+              className="flex h-[var(--ring)] items-center rounded-full border border-white/40 bg-ink-raised pr-4 text-[clamp(12px,1.4vw,13.5px)] font-medium text-copy-secondary"
+              style={{ marginLeft: "calc(var(--ring) * -0.42)", paddingLeft: "calc(var(--ring) * 0.58)" }}
+            >
+              {profile.location} · {profile.relocation}
+            </span>
+          </div>
+
+          <Chapter className="fx-reveal mt-8" style={d(0.1)}>
+            06 / Contact
+          </Chapter>
+          <h2
+            id="contact-title"
+            className="fx-reveal mt-3 whitespace-nowrap font-dot text-[clamp(40px,8vw,104px)] font-black leading-[1.12] tracking-[-0.04em] text-copy-primary max-md:tracking-[-0.08em]"
+            style={d(0.12)}
+          >
+            Get in touch
+          </h2>
+          <p
+            className="fx-reveal mt-5 max-w-[min(500px,92%)] text-[clamp(15px,1.55vw,18px)] leading-[1.55] text-[#d0d6e2]/80"
+            style={d(0.28)}
+          >
+            Based in {profile.location} and open to relocation. The fastest way to reach me is email.
+          </p>
+
+          <div className="fx-reveal mt-9 flex flex-wrap items-center justify-center gap-3" style={d(0.4)}>
+            <a
+              href={`mailto:${profile.email}`}
+              className="ops-glow rounded-full bg-accent px-7 py-3 text-[14.5px] font-semibold text-ink-base"
+            >
+              Email me
+            </a>
+            <button
+              type="button"
+              onClick={copy}
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-ink-raised/70 px-5 py-3 text-[14px] text-copy-secondary backdrop-blur transition-colors hover:text-copy-primary"
+            >
+              {copied ? <Check aria-hidden="true" className="h-4 w-4" /> : <Copy aria-hidden="true" className="h-4 w-4" />}
+              <span aria-live="polite">{copied ? "Copied" : profile.email}</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-16 w-full">
+          <h3 className="fx-reveal mb-5 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-copy-muted" style={d(0.45)}>
+            Open to
+          </h3>
+          <ul className="grid w-full grid-cols-2 gap-6 md:grid-cols-4">
+            {OPEN_TO.map((item, i) => (
+              <li key={item} className="fx-reveal flex flex-col items-center text-center" style={d(0.5 + i * 0.08)}>
+                <span aria-hidden="true" className="font-dot text-[clamp(22px,3vw,33px)] font-black leading-none text-copy-primary">
+                  {GLYPHS[i]}
+                </span>
+                <span className="mt-3 text-[clamp(12px,1.2vw,13.5px)] leading-5 text-copy-secondary">{item}</span>
               </li>
             ))}
           </ul>
-        </Reveal>
-      </div>
-    </Section>
+        </div>
+      </InView>
+    </section>
   );
 }

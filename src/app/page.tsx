@@ -7,10 +7,12 @@ import { CaseStudiesSection } from "@/components/case-studies-section";
 import { EducationSection } from "@/components/education-section";
 import { ContactSection } from "@/components/contact-section";
 import { SiteFooter } from "@/components/site-footer";
+import { PointerFX } from "@/components/motion";
 
 export default function Home() {
   return (
     <>
+      <PointerFX />
       <SiteNav />
       <main id="main">
         <Hero />
