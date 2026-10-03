@@ -2,15 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Grade } from "@/components/graded-video";
-import { asset } from "@/lib/site";
-
-/*
- * Self-hosted re-encode of the NovaAI film (FILM.runtime in lib/films). The original has one
- * keyframe in 241 frames, so every scrub seek re-decoded from frame 1 (the lag).
- * This copy has a keyframe every 2 frames and the invert/grayscale grade baked in:
- * ffmpeg -vf "scale=1600:-2,hue=s=0,negate,eq=contrast=1.35:brightness=0.02" -g 2 -crf 25
- */
-const SCRUB_FILM = asset("/films/runtime-scrub.mp4");
+import { filmSrc } from "@/lib/films";
 import { caseStudies } from "@/content/case-studies";
 import { Chapter } from "@/components/chapter";
 
@@ -111,14 +103,17 @@ export function CaseStudiesSection() {
     // Fetched as a blob once nearby, so scrubbing seeks locally instead of over the network.
     const load = async () => {
       if (v.src) return;
+      // Blob so scrub seeks are local. The NovaAI source had 1 keyframe in 241 frames; this
+      // re-encode (lib/films) has one every 3, which is what made scrubbing smooth.
+      const src = filmSrc("runtime-scrub");
       try {
-        v.src = URL.createObjectURL(await (await fetch(SCRUB_FILM)).blob());
+        v.src = URL.createObjectURL(await (await fetch(src)).blob());
       } catch {
-        v.src = SCRUB_FILM;
+        v.src = src;
       }
       if (!pinned && visible) v.play().catch(() => {});
     };
-    const near = new IntersectionObserver(([e]) => e.isIntersecting && load(), { rootMargin: "100% 0px" });
+    const near = new IntersectionObserver(([e]) => e.isIntersecting && load(), { rootMargin: "50% 0px" });
     const seen = new IntersectionObserver(([e]) => {
       visible = e.isIntersecting;
       if (pinned) return;

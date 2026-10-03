@@ -131,10 +131,22 @@ function Sphere({ onGrid }: { onGrid: () => void }) {
       last = { w, h };
       setGeo(geometry());
     };
-    relayout(true);
-    const onResize = () => relayout();
+    // Build the 59 cards only once the sphere is ~1 viewport away, not during page load.
+    const near = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        near.disconnect();
+        relayout(true);
+      },
+      { rootMargin: "100% 0px" },
+    );
+    if (section.current) near.observe(section.current);
+    const onResize = () => last.w && relayout();
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return () => {
+      near.disconnect();
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -393,7 +405,7 @@ function Sphere({ onGrid }: { onGrid: () => void }) {
             <span
               aria-hidden="true"
               className="h-[52px] w-[52px] shrink-0 rounded-[3px] bg-cover grayscale-[.15] max-sm:h-[42px] max-sm:w-[42px]"
-              style={{ backgroundImage: `url(${asset("/hero/bottom.png")})`, backgroundSize: "330% auto", backgroundPosition: "50% 22%" }}
+              style={{ backgroundImage: `url(${asset("/hero/bottom.webp")})`, backgroundSize: "330% auto", backgroundPosition: "50% 22%" }}
             />
             <Chapter>03 / Expertise</Chapter>
           </div>

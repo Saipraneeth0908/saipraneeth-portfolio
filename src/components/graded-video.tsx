@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { filmSrc, type Film } from "@/lib/films";
 
 /*
- * Palette grade: grayscale the footage, multiply by the grade colour so highlights
- * land on `grade` (tailwind.config) and shadows on ink, then a scrim for text contrast.
+ * Palette grade: films arrive already grayscale/contrast-graded (baked at
+ * encode, see lib/films); this multiplies them by `grade` (tailwind.config)
+ * so highlights land on blue and shadows on ink, then a scrim for contrast.
  */
-export const gradeFilter = (brightness = 0.9) => `grayscale(1) contrast(1.15) brightness(${brightness})`;
 
 export function Grade({ scrim = 0.35 }: { scrim?: number }) {
   return (
@@ -22,14 +23,12 @@ export function Grade({ scrim = 0.35 }: { scrim?: number }) {
  * needed, plays only while visible (and `active`), pauses otherwise.
  */
 export function GradedVideo({
-  src,
+  film,
   active = true,
-  brightness,
   className = "",
 }: {
-  src: string;
+  film: Film;
   active?: boolean;
-  brightness?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -43,7 +42,7 @@ export function GradedVideo({
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     sync.current = () => {
       const s = state.current;
-      if (s.near && s.active && !v.src) v.src = src;
+      if (s.near && s.active && !v.src) v.src = filmSrc(film);
       if (s.visible && s.active && !reduce) v.play().catch(() => {});
       else v.pause();
     };
@@ -52,7 +51,7 @@ export function GradedVideo({
         state.current.near = e.isIntersecting;
         sync.current();
       },
-      { rootMargin: "100% 0px" },
+      { rootMargin: "50% 0px" },
     );
     const seen = new IntersectionObserver(([e]) => {
       state.current.visible = e.isIntersecting;
@@ -64,7 +63,7 @@ export function GradedVideo({
       near.disconnect();
       seen.disconnect();
     };
-  }, [src]);
+  }, [film]);
 
   useEffect(() => sync.current(), [active]);
 
@@ -78,7 +77,6 @@ export function GradedVideo({
       preload="none"
       disablePictureInPicture
       className={`absolute inset-0 h-full w-full object-cover ${className}`}
-      style={{ filter: gradeFilter(brightness) }}
     />
   );
 }

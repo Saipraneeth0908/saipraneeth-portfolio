@@ -12,8 +12,8 @@ import { ScratchReveal } from "@/components/scratch-reveal";
 export function Hero() {
   return (
     <ScratchReveal
-      top={asset("/hero/bottom.png")}
-      bottom={asset("/hero/top.png")}
+      top={asset("/hero/bottom.webp")}
+      bottom={asset("/hero/top.webp")}
       className="relative h-[100svh] w-full touch-pan-y overflow-hidden bg-white"
     >
       <div

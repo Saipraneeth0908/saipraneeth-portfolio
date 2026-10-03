@@ -4,7 +4,6 @@ import { useState, type CSSProperties } from "react";
 import { BrainCircuit, Check, Copy, FileText, Github, Linkedin, Server, Sparkles, Workflow } from "lucide-react";
 import { InView } from "@/components/motion";
 import { Grade, GradedVideo } from "@/components/graded-video";
-import { FILM } from "@/lib/films";
 import { profile } from "@/content/profile";
 import { asset } from "@/lib/site";
 import { Chapter, IconBadge } from "@/components/chapter";
@@ -43,7 +42,7 @@ export function ContactSection() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-ink-base">
       <div aria-hidden="true" className="film-feather absolute inset-0 overflow-hidden">
-        <GradedVideo src={FILM.ops} />
+        <GradedVideo film="contact-ops" />
         <Grade scrim={0.4} />
         <div
           aria-hidden="true"
@@ -70,7 +69,7 @@ export function ContactSection() {
               </a>
             ))}
             <span
-              className="flex h-[var(--ring)] items-center rounded-full border border-white/40 bg-ink-raised pr-4 t-small text-copy-secondary"
+              className="flex min-h-[var(--ring)] items-center rounded-[calc(var(--ring)/2)] border border-white/40 bg-ink-raised py-1 pr-4 t-small leading-snug text-copy-secondary"
               style={{ marginLeft: "calc(var(--ring) * -0.42)", paddingLeft: "calc(var(--ring) * 0.58)" }}
             >
               {profile.location} · {profile.relocation}

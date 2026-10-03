@@ -1,6 +1,5 @@
 import { InView } from "@/components/motion";
 import { Grade, GradedVideo } from "@/components/graded-video";
-import { FILM } from "@/lib/films";
 import { about, focusAreas } from "@/content/profile";
 import type { CSSProperties } from "react";
 import { Chapter } from "@/components/chapter";
@@ -22,9 +21,9 @@ export function About() {
       {/* Sits over the hero's bottom edge: blurs and fades the white portrait into ink. */}
       <div aria-hidden="true" className="seam-blur pointer-events-none absolute inset-x-0 bottom-full h-10 md:h-[12vh]" />
 
-      {/* Night footage: lifted before the grade, light scrim — Velorah lets the film carry the depth. */}
+      {/* Night footage (lifted at encode), light scrim — Velorah lets the film carry the depth. */}
       <div aria-hidden="true" className="film-feather absolute inset-0 overflow-hidden">
-        <GradedVideo src={FILM.velorah} brightness={1.9} />
+        <GradedVideo film="about-velorah" />
         <Grade scrim={0.12} />
       </div>
 

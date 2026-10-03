@@ -238,7 +238,7 @@ export function ScratchReveal({
         draw(t);
         needsClean = st.stamps.length > 0; // one clean redraw after the last stamp dies
       }
-      raf = requestAnimationFrame(frame);
+      raf = visible ? requestAnimationFrame(frame) : 0;
     };
 
     const addStamp = (x: number, y: number, r: number, angle: number, stretch: number, t: number) => {
@@ -258,12 +258,27 @@ export function ScratchReveal({
     addStampRef.current = (x, y) =>
       addStamp(x, y, Math.min(W, H) * 0.175, Math.atan2(st.dy, st.dx), 0, st.now || last);
 
-    img.onload = () => {
-      loaded = true;
-      needsClean = true;
-      setReady(true);
-    };
+    // Decode off the main thread so the first drawImage doesn't stall.
     img.src = top;
+    img
+      .decode()
+      .catch(() => {})
+      .then(() => {
+        loaded = true;
+        needsClean = true;
+        setReady(true);
+      });
+
+    // Only animate while the hero is on screen.
+    let visible = true;
+    const io = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible && !raf) {
+        last = performance.now() / 1000;
+        raf = requestAnimationFrame(frame);
+      }
+    });
+    io.observe(section);
 
     const ro = new ResizeObserver(resize);
     ro.observe(section);
@@ -272,6 +287,7 @@ export function ScratchReveal({
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
     };
   }, [top]);
 

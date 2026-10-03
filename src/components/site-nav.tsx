@@ -67,7 +67,7 @@ export function SiteNav() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-ink-line/70 bg-ink-base/85 backdrop-blur">
       <nav aria-label="Primary" className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
-          <a href="#home" className="font-mono text-sm font-medium tracking-tight text-copy-primary">
+          <a href="#home" className="-my-3 py-3 font-mono text-sm font-medium tracking-tight text-copy-primary">
             sai<span className="text-accent">.</span>praneeth
           </a>
 

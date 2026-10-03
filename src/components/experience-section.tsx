@@ -2,16 +2,10 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
-import { Grade, gradeFilter } from "@/components/graded-video";
+import { Grade } from "@/components/graded-video";
 import { experience } from "@/content/experience";
 import { Chapter } from "@/components/chapter";
-import { asset } from "@/lib/site";
-
-/*
- * Self-hosted re-encode of FILM.wave (lib/films): keyframe every 3 frames so it
- * can be seeked in both directions without stutter, desaturated at encode.
- */
-const ROUTE_FILM = asset("/films/experience-route.mp4");
+import { filmSrc } from "@/lib/films";
 
 const ease = (k: number) => (k < 0.5 ? 4 * k * k * k : 1 - (-2 * k + 2) ** 3 / 2);
 
@@ -35,13 +29,14 @@ export function ExperienceSection() {
       async ([e]) => {
         if (!e.isIntersecting || v.src) return;
         io.disconnect();
+        const src = filmSrc("experience-route");
         try {
-          v.src = URL.createObjectURL(await (await fetch(ROUTE_FILM)).blob());
+          v.src = URL.createObjectURL(await (await fetch(src)).blob());
         } catch {
-          v.src = ROUTE_FILM;
+          v.src = src;
         }
       },
-      { rootMargin: "100% 0px" },
+      { rootMargin: "50% 0px" },
     );
     io.observe(v);
     return () => io.disconnect();
@@ -93,7 +88,6 @@ export function ExperienceSection() {
           disablePictureInPicture
           // Scaled from the bottom: crops the dark pergola beam along the top of this footage.
           className="absolute inset-0 h-full w-full origin-bottom scale-[1.2] object-cover"
-          style={{ filter: gradeFilter() }}
         />
         <Grade scrim={0.4} />
         <div
@@ -127,7 +121,7 @@ export function ExperienceSection() {
                     aria-selected={i === active}
                     aria-controls={`experience-panel-${i}`}
                     onClick={() => setActive(i)}
-                    className={`role-link t-label w-fit text-left text-copy-primary ${
+                    className={`role-link t-label -my-[7px] w-fit py-[7px] text-left text-copy-primary ${
                       i === active ? "opacity-100" : "opacity-55 hover:opacity-75"
                     }`}
                   >
