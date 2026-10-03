@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { InView, Words } from "@/components/motion";
 import { expertise } from "@/content/expertise";
+import { capabilityNotes, layerImages } from "@/content/capability-notes";
 import { asset } from "@/lib/site";
 import { Chapter } from "@/components/chapter";
 
@@ -24,16 +25,58 @@ const SPHERE = CARDS.map((_, i) => {
   return { x, y, z, lat: (Math.asin(y) * 180) / Math.PI, lon: (Math.atan2(x, z) * 180) / Math.PI };
 });
 
-// Each card shows a different window of the hero's tech-wall illustration,
-// skipping the centre band where the portrait sits.
-const crop = (i: number, size = "700%"): CSSProperties => {
-  const x = (i * 37) % 61;
-  return {
-    backgroundImage: `url(${asset("/hero/top.png")})`,
-    backgroundSize: `${size} auto`,
-    backgroundPosition: `${x > 30 ? x + 40 : x}% ${(i * 61) % 101}%`,
-  };
-};
+/*
+ * A capability's visual: its concept still, or the official tool mark on the
+ * blue plinth, or (no official mark) the name set as a wordmark on the plinth.
+ */
+function Visual({ item, large = false, wordSize }: { item: string; large?: boolean; wordSize: number }) {
+  const { image, logo } = capabilityNotes[item] ?? {};
+  const sm = large ? "" : "-sm";
+  if (image) {
+    return (
+      <img
+        src={asset(`/expertise/${image}${sm}.webp`)}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+    );
+  }
+  return (
+    <>
+      <img
+        src={asset(`/expertise/tool-plinth${sm}.webp`)}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      {logo ? (
+        <span
+          aria-hidden="true"
+          className="absolute left-1/2 top-[44%] aspect-square w-[26%] -translate-x-1/2 -translate-y-1/2 bg-copy-primary [filter:drop-shadow(0_0_14px_rgba(76,159,255,0.65))]"
+          style={{
+            WebkitMask: `url(${asset(`/expertise/logos/${logo}.svg`)}) center / contain no-repeat`,
+            mask: `url(${asset(`/expertise/logos/${logo}.svg`)}) center / contain no-repeat`,
+          }}
+        />
+      ) : (
+        <span
+          aria-hidden="true"
+          className="absolute inset-x-0 top-[44%] -translate-y-1/2 text-center font-display leading-none text-copy-primary [text-shadow:0_0_24px_rgba(76,159,255,0.6)]"
+          style={{ fontSize: wordSize }}
+        >
+          {item}
+        </span>
+      )}
+    </>
+  );
+}
+
+const isWordmark = (item: string) => !capabilityNotes[item]?.image && !capabilityNotes[item]?.logo;
 
 type Geo = { R: number; cw: number; persp: number; hw: number };
 
@@ -298,13 +341,16 @@ function Sphere({ onGrid }: { onGrid: () => void }) {
                         transform: `translate3d(${s.x * geo.R}px, ${-s.y * geo.R}px, ${s.z * geo.R}px) rotateY(${s.lon}deg) rotateX(${s.lat}deg)`,
                       }}
                     >
-                      <figure className="relative m-0 h-full w-full overflow-hidden rounded-[3px] bg-[#0b0d13]" style={crop(i)}>
+                      <figure className="relative m-0 h-full w-full overflow-hidden rounded-[3px] bg-[#0b0d13]">
+                        <Visual item={c.item} wordSize={Math.max(11, geo.cw * 0.15)} />
+                        {isWordmark(c.item) ? null : (
                         <figcaption
                           className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-base/95 via-ink-base/60 to-transparent px-2 pb-1.5 pt-5 text-left font-display leading-tight text-copy-primary [backface-visibility:hidden]"
                           style={{ fontSize: Math.max(10, geo.cw * 0.105) }}
                         >
                           {c.item}
                         </figcaption>
+                        )}
                       </figure>
                     </button>
                   );
@@ -324,7 +370,7 @@ function Sphere({ onGrid }: { onGrid: () => void }) {
           <h2
             ref={headline}
             id="expertise-title"
-            className="select-none text-center font-display text-[clamp(25px,3.7vw,55px)] font-normal leading-[1.06] tracking-[-0.005em] text-copy-primary [text-shadow:0_2px_34px_rgba(10,11,15,0.9),0_0_80px_rgba(10,11,15,0.9)] max-md:text-[clamp(22px,6.4vw,34px)]"
+            className="t-display select-none text-center [text-shadow:0_2px_34px_rgba(10,11,15,0.9),0_0_80px_rgba(10,11,15,0.9)]"
             style={{ width: geo?.hw ?? 640 }}
           >
             <Words text="Capabilities, grouped by how they're used" emphasis="how they're used" />
@@ -351,13 +397,13 @@ function Sphere({ onGrid }: { onGrid: () => void }) {
             />
             <Chapter>03 / Expertise</Chapter>
           </div>
-          <p className="text-[12.5px] leading-[1.62] text-copy-secondary max-[380px]:hidden">
+          <p className="t-small max-[380px]:hidden">
             Organized by the layer of the system each one belongs to, rather than as a flat keyword list.
           </p>
         </div>
 
         <div
-          className={`absolute bottom-[clamp(14px,2.6vw,34px)] left-1/2 hidden -translate-x-1/2 items-center gap-2.5 whitespace-nowrap text-[10px] uppercase tracking-[0.24em] text-copy-muted transition-opacity duration-500 sm:flex ${
+          className={`absolute bottom-[clamp(14px,2.6vw,34px)] left-1/2 hidden -translate-x-1/2 items-center gap-2.5 whitespace-nowrap t-label text-copy-muted transition-opacity duration-500 sm:flex ${
             hidden ? "opacity-0" : ""
           }`}
         >
@@ -366,7 +412,7 @@ function Sphere({ onGrid }: { onGrid: () => void }) {
         </div>
 
         <div className="absolute bottom-[clamp(14px,2.6vw,34px)] right-[clamp(14px,2.6vw,34px)] flex items-center gap-5">
-          <p className="hidden text-[12.5px] text-copy-secondary md:block">
+          <p className="t-small hidden md:block">
             {expertise.length} layers · {N} capabilities
           </p>
           <button
@@ -385,40 +431,39 @@ function Sphere({ onGrid }: { onGrid: () => void }) {
           role="dialog"
           aria-modal="true"
           aria-labelledby="lit-title"
-          className={`fixed inset-0 z-[90] grid place-items-center px-[clamp(14px,2.6vw,34px)] py-[clamp(56px,8vh,84px)] transition-opacity duration-500 ${
+          className={`fixed inset-0 z-[90] grid place-items-center p-4 transition-opacity duration-500 md:p-8 ${
             closing ? "opacity-0" : "opacity-100"
           }`}
         >
-          <button type="button" aria-label="Close" tabIndex={-1} className="absolute inset-0 cursor-default" onClick={close} />
+          <button type="button" aria-label="Close" tabIndex={-1} className="absolute inset-0 cursor-default bg-ink-base/75 backdrop-blur-md" onClick={close} />
+          {/* Liquid-glass plate: stacked on small screens, image | text side by side from lg so it fits short viewports. */}
           <div
             ref={plate}
-            className="relative w-[min(72vw,860px,calc((100vh-230px)*1.5))] transition-[transform,opacity] duration-[620ms] max-md:w-[min(92vw,calc((100dvh-220px)*1.5))]"
+            className="liquid-glass relative grid max-h-full w-[min(92vw,620px,calc(48svh*1.5+2.5rem))] gap-5 overflow-y-auto rounded-3xl lg:w-[min(92vw,1080px)] lg:grid-cols-[1.35fr_1fr] lg:items-center lg:gap-7 bg-ink-base/40 p-4 shadow-[0_30px_90px_rgba(0,0,0,0.6)] transition-[transform,opacity] duration-[620ms] md:p-5"
           >
-            <div
-              className="relative aspect-[3/2] w-full rounded-[2px] bg-[#0b0d13] shadow-[0_30px_90px_rgba(0,0,0,0.75)]"
-              style={crop(lit!, "260%")}
-            >
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl bg-[#0b0d13]">
+              <Visual item={card.item} large wordSize={56} />
               <button
                 type="button"
                 onClick={close}
                 autoFocus
-                className="absolute right-3.5 top-3 min-h-[44px] rounded-md border border-copy-primary/80 bg-ink-base/35 px-3.5 py-2.5 text-[12.5px] text-copy-primary transition-colors hover:border-white hover:bg-ink-base/55"
+                className="liquid-glass t-small !absolute right-3 top-3 min-h-[40px] rounded-full px-4 text-copy-primary transition-transform hover:scale-[1.03]"
               >
                 Close
               </button>
             </div>
-            <div className="grid gap-[clamp(10px,3.2vw,48px)] pt-4 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
+            <div className="grid gap-4 px-1 pb-1 lg:py-2 lg:pr-3">
               <div>
-                <h3 id="lit-title" className="mb-1.5 font-display text-[clamp(22px,2.15vw,32px)] leading-[1.08] tracking-[-0.01em] text-copy-primary">
+                <h3 id="lit-title" className="t-title mb-1.5">
                   {card.item}
                 </h3>
-                <p className="text-[13px] text-copy-secondary">
+                <p className="t-meta">
                   {group.title} · 0{card.gi + 1} / 0{expertise.length}
                 </p>
               </div>
               <div>
-                <p className="text-[13.5px] leading-[1.55] text-copy-primary/90">{group.blurb}</p>
-                <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[12px] text-copy-muted">
+                <p className="t-body text-copy-primary/90">{capabilityNotes[card.item]?.note ?? group.blurb}</p>
+                <ul className="t-small mt-3 flex flex-wrap gap-x-3 gap-y-1 text-copy-muted">
                   {group.items.map((item) => (
                     <li key={item} className={item === card.item ? "text-accent" : undefined}>
                       {item}
@@ -448,10 +493,10 @@ export function ExpertiseSection() {
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
               <Chapter>03 / Expertise</Chapter>
-              <h2 id="expertise-title" className="mt-4 font-display text-4xl text-copy-primary md:text-6xl">
+              <h2 id="expertise-title" className="t-display mt-5">
                 Capabilities, grouped by <em className="text-accent-soft">how they&apos;re used</em>
               </h2>
-              <p className="mt-4 max-w-prose text-sm leading-6 text-copy-secondary">
+              <p className="t-body mt-4 max-w-prose">
                 Organized by the layer of the system each one belongs to, rather than as a flat keyword list.
               </p>
             </div>
@@ -469,20 +514,22 @@ export function ExpertiseSection() {
           {expertise.map((group, gi) => (
             <figure key={group.title} className="group m-0">
               <div className="relative aspect-[3/2] overflow-hidden rounded-[3px] bg-[#0b0d13]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 opacity-[0.82] transition duration-[800ms] group-hover:scale-105 group-hover:opacity-100"
-                  style={crop(gi * 11, "300%")}
+                <img
+                  src={asset(`/expertise/${layerImages[gi]}.webp`)}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover opacity-[0.82] transition duration-[800ms] group-hover:scale-105 group-hover:opacity-100"
                 />
-                <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-base/85 to-transparent px-3.5 pb-3 pt-7 font-display text-xl text-copy-primary">
-                  <span className="mr-2 font-mono text-[10px] text-accent">0{gi + 1}</span>
+                <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-base/85 to-transparent px-3.5 pb-3 pt-7 t-title">
+                  <span className="t-meta mr-2 text-accent">0{gi + 1}</span>
                   {group.title}
                 </p>
               </div>
               <figcaption className="pt-3">
                 <h3 className="sr-only">{group.title}</h3>
-                <p className="text-[13px] leading-6 text-copy-secondary">{group.blurb}</p>
-                <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[12px] text-copy-muted">
+                <p className="t-small">{group.blurb}</p>
+                <ul className="t-small mt-2 flex flex-wrap gap-x-3 gap-y-1 text-copy-muted">
                   {group.items.map((item) => (
                     <li key={item}>{item}</li>
                   ))}

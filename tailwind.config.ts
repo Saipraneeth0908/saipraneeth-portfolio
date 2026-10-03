@@ -21,12 +21,13 @@ const config: Config = {
           soft: "#8dc2ff",
           dim: "rgba(76, 159, 255, 0.14)",
         },
+        // Film grade: background footage is multiplied by this (blue duotone).
+        grade: "#4c9fff",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
         display: ["var(--font-display)", "Georgia", "serif"],
-        dot: ["Doto", "var(--font-mono)", "monospace"],
       },
       maxWidth: {
         prose: "68ch",

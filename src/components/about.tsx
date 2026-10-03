@@ -32,16 +32,16 @@ export function About() {
         <Chapter className="fx-rise">01 / About</Chapter>
         <h2
           id="about-title"
-          className="fx-rise mt-10 max-w-7xl font-display text-6xl font-normal leading-[0.95] tracking-[-2.46px] text-copy-primary sm:text-8xl md:text-9xl"
+          className="fx-rise t-display mt-8 max-w-4xl"
           style={delay(0.1)}
         >
           What I <em className="not-italic text-copy-muted">build</em>
         </h2>
-        <p className="fx-rise mt-8 max-w-2xl text-base leading-relaxed text-copy-secondary sm:text-lg" style={delay(0.2)}>
+        <p className="fx-rise t-lead mt-6 max-w-2xl" style={delay(0.2)}>
           {lead}
         </p>
 
-        <div className="mt-14 grid max-w-4xl gap-6 text-left text-sm leading-7 text-copy-secondary md:grid-cols-2">
+        <div className="t-body mt-12 grid max-w-4xl gap-6 text-left md:grid-cols-2">
           {rest.map((p, i) => (
             <p key={p} className="fx-rise" style={delay(0.3 + i * 0.1)}>
               {p}
@@ -56,8 +56,8 @@ export function About() {
               className="fx-rise liquid-glass rounded-3xl p-6 transition-transform duration-300 hover:scale-[1.03]"
               style={delay(0.45 + k * 0.1)}
             >
-              <h3 className="font-display text-2xl text-copy-primary">{area.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-copy-secondary">{area.detail}</p>
+              <h3 className="t-title">{area.title}</h3>
+              <p className="t-small mt-3">{area.detail}</p>
             </li>
           ))}
         </ul>

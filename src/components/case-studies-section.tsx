@@ -18,7 +18,7 @@ const COUNT = caseStudies.length;
 const shadow = "[text-shadow:0_2px_24px_rgba(10,11,15,0.65)]";
 
 function Chip({ children }: { children: React.ReactNode }) {
-  return <li className="liquid-glass rounded-full px-3 py-1.5 text-[11px] leading-4 text-copy-primary">{children}</li>;
+  return <li className="liquid-glass t-small rounded-full px-3 py-1 text-copy-primary">{children}</li>;
 }
 
 type Study = (typeof caseStudies)[number];
@@ -26,15 +26,15 @@ type Study = (typeof caseStudies)[number];
 function StudyIntro({ s, i }: { s: Study; i: number }) {
   return (
     <div>
-      <p className="font-mono text-xs text-copy-secondary">
+      <p className="t-meta text-copy-secondary">
         {String(i + 1).padStart(2, "0")} — {s.context}
       </p>
       <h3
-        className={`mt-4 font-display text-[clamp(40px,4.6vw,72px)] leading-[0.98] tracking-[-0.02em] text-copy-primary ${shadow}`}
+        className={`t-title mt-4 text-[clamp(1.75rem,2.8vw,2.75rem)] ${shadow}`}
       >
         {s.title}
       </h3>
-      <p className={`mt-6 max-w-xl text-base leading-7 text-copy-primary/90 ${shadow}`}>{s.outcome}</p>
+      <p className={`t-lead mt-6 max-w-xl text-copy-primary/90 ${shadow}`}>{s.outcome}</p>
       <ul aria-label="Technologies" className="mt-6 flex flex-wrap gap-2">
         {s.technologies.map((t) => (
           <Chip key={t}>{t}</Chip>
@@ -47,27 +47,27 @@ function StudyIntro({ s, i }: { s: Study; i: number }) {
 function StudyDetail({ s }: { s: Study }) {
   return (
     <div className="liquid-glass rounded-3xl p-6 md:p-7">
-      <div className="grid gap-5 text-[13px] leading-6 text-copy-secondary md:grid-cols-2">
+      <div className="t-small grid gap-5 md:grid-cols-2">
         <div>
-          <h4 className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">Problem</h4>
+          <h4 className="t-label text-accent">Problem</h4>
           <p className="mt-2">{s.problem}</p>
         </div>
         <div>
-          <h4 className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">Approach</h4>
+          <h4 className="t-label text-accent">Approach</h4>
           <p className="mt-2">{s.approach}</p>
         </div>
       </div>
-      <h4 className="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">Workflow</h4>
+      <h4 className="t-label mt-6 text-accent">Workflow</h4>
       <ol className="mt-2 flex flex-wrap gap-2">
         {s.workflow.map((step, k) => (
           <Chip key={step}>
-            <span className="mr-1.5 font-mono text-[10px] text-accent-soft">{String(k + 1).padStart(2, "0")}</span>
+            <span className="t-meta mr-1.5 text-accent-soft">{String(k + 1).padStart(2, "0")}</span>
             {step}
           </Chip>
         ))}
       </ol>
-      <h4 className="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">Engineering challenges</h4>
-      <ul className="mt-2 space-y-1.5 text-[13px] leading-6 text-copy-secondary">
+      <h4 className="t-label mt-6 text-accent">Engineering challenges</h4>
+      <ul className="t-small mt-2 space-y-1.5">
         {s.challenges.map((c) => (
           <li key={c} className="flex gap-3">
             <span aria-hidden="true" className="mt-3 h-px w-3 shrink-0 bg-accent" />
@@ -166,7 +166,7 @@ export function CaseStudiesSection() {
   const header = (
     <header>
       <Chapter>04 / Selected engineering work</Chapter>
-      <h2 id="work-title" className={`mt-4 font-display text-4xl text-copy-primary md:text-5xl ${shadow}`}>
+      <h2 id="work-title" className={`t-display mt-5 ${shadow}`}>
         Representative case studies
       </h2>
     </header>
@@ -221,8 +221,8 @@ export function CaseStudiesSection() {
                       }`}
                     />
                   </span>
-                  <span className="mt-3 flex gap-2 text-[11px] uppercase leading-4 tracking-wide text-copy-primary">
-                    <span className="shrink-0 font-mono text-[10px] text-accent">0{i + 1} /</span>
+                  <span className="t-label mt-3 flex gap-2 text-copy-primary">
+                    <span className="shrink-0 text-accent">0{i + 1} /</span>
                     <span className="line-clamp-2">{s.title}</span>
                   </span>
                 </button>

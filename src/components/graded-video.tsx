@@ -3,15 +3,15 @@
 import { useEffect, useRef } from "react";
 
 /*
- * Palette grade: grayscale the footage, multiply by the accent so highlights
- * land on #4c9fff and shadows on ink, then a scrim for text contrast.
+ * Palette grade: grayscale the footage, multiply by the grade colour so highlights
+ * land on `grade` (tailwind.config) and shadows on ink, then a scrim for text contrast.
  */
 export const gradeFilter = (brightness = 0.9) => `grayscale(1) contrast(1.15) brightness(${brightness})`;
 
 export function Grade({ scrim = 0.35 }: { scrim?: number }) {
   return (
     <>
-      <div aria-hidden="true" className="absolute inset-0 bg-accent mix-blend-multiply" />
+      <div aria-hidden="true" className="absolute inset-0 bg-grade mix-blend-multiply" />
       <div aria-hidden="true" className="absolute inset-0 bg-ink-base" style={{ opacity: scrim }} />
     </>
   );

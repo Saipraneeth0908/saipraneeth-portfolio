@@ -83,12 +83,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       className={`${inter.variable} ${mono.variable} ${display.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        {/* Doto (dot-matrix display for the Education/Contact scenes) is not in next/font's catalog yet. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&display=swap" rel="stylesheet" />
-      </head>
       <body>
         {/* Gates JS-only entrance states so content is never hidden without JS. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

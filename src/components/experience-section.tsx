@@ -110,10 +110,10 @@ export function ExperienceSection() {
         <div className="flex flex-col justify-between gap-12">
           <div>
             <Chapter>02 / Experience</Chapter>
-            <h2 id="experience-title" className="mt-4 text-xs font-medium uppercase tracking-[-0.12px] text-copy-primary">
+            <h2 id="experience-title" className="t-display mt-5">
               Where I&apos;ve done the work
             </h2>
-            <p className="mt-3 max-w-md text-sm leading-6 text-copy-secondary">
+            <p className="t-body mt-4 max-w-md">
               Five years across applied GenAI, machine learning, and data engineering — moving from analytics
               pipelines into LLM systems that run in production.
             </p>
@@ -127,16 +127,16 @@ export function ExperienceSection() {
                     aria-selected={i === active}
                     aria-controls={`experience-panel-${i}`}
                     onClick={() => setActive(i)}
-                    className={`role-link w-fit text-left uppercase text-copy-primary ${
+                    className={`role-link t-label w-fit text-left text-copy-primary ${
                       i === active ? "opacity-100" : "opacity-55 hover:opacity-75"
                     }`}
                   >
-                    <span className="text-[8px] font-medium leading-3 tracking-[-0.08px]">0{i + 1} / </span>
-                    <span className="text-xs font-medium leading-4 tracking-[-0.12px]">{r.company}</span>
+                    <span className="text-copy-muted">0{i + 1} / </span>
+                    <span>{r.company}</span>
                   </button>
                 ))}
               </div>
-              <p className="flex items-center gap-2.5 text-xs font-medium uppercase text-copy-primary">
+              <p className="t-label flex items-center gap-2.5 text-copy-primary">
                 <span
                   aria-hidden="true"
                   className={`pulse-dot h-[7px] w-[7px] rounded-full ${
@@ -163,20 +163,20 @@ export function ExperienceSection() {
             // All panels stay in the HTML (crawlers, no-JS); inactive ones are hidden. Unhiding replays the reveal.
             <div key={r.company} id={`experience-panel-${i}`} role="tabpanel" aria-label={r.company} hidden={i !== active}>
               <div className="reveal-right">
-                <h3 className="text-base font-medium leading-6 text-copy-primary">{r.role}</h3>
-                <p className="font-mono text-xs text-copy-secondary">{r.period}</p>
-                <p className="mt-4 text-base font-medium leading-6 tracking-[-0.16px] text-copy-primary">
+                <h3 className="t-title">{r.role}</h3>
+                <p className="t-meta mt-1">{r.period}</p>
+                <p className="t-lead mt-4 text-copy-primary">
                   {r.summary}
                 </p>
                 <ul className="mt-5 space-y-2">
                   {r.highlights.map((item) => (
-                    <li key={item} className="flex gap-3 text-[13px] leading-5 text-copy-secondary">
+                    <li key={item} className="t-small flex gap-3">
                       <span aria-hidden="true" className="mt-2.5 h-px w-3 shrink-0 bg-accent" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] uppercase text-copy-muted">
+                <ul className="t-meta mt-5 flex flex-wrap gap-x-3 gap-y-1">
                   {r.stack.map((tool) => (
                     <li key={tool}>{tool}</li>
                   ))}

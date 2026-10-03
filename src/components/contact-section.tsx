@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
-import { Check, Copy, FileText, Github, Linkedin } from "lucide-react";
+import { BrainCircuit, Check, Copy, FileText, Github, Linkedin, Server, Sparkles, Workflow } from "lucide-react";
 import { InView } from "@/components/motion";
 import { Grade, GradedVideo } from "@/components/graded-video";
 import { FILM } from "@/lib/films";
 import { profile } from "@/content/profile";
 import { asset } from "@/lib/site";
-import { Chapter } from "@/components/chapter";
+import { Chapter, IconBadge } from "@/components/chapter";
 
 const OPEN_TO = [
   "Generative AI engineering roles",
@@ -15,7 +15,7 @@ const OPEN_TO = [
   "Backend AI application development",
   "Technical collaboration on retrieval and agent systems",
 ];
-const GLYPHS = ["<", "%", "*", "#"];
+const ICONS = [Sparkles, BrainCircuit, Server, Workflow];
 const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
 /*
@@ -70,7 +70,7 @@ export function ContactSection() {
               </a>
             ))}
             <span
-              className="flex h-[var(--ring)] items-center rounded-full border border-white/40 bg-ink-raised pr-4 text-[clamp(12px,1.4vw,13.5px)] font-medium text-copy-secondary"
+              className="flex h-[var(--ring)] items-center rounded-full border border-white/40 bg-ink-raised pr-4 t-small text-copy-secondary"
               style={{ marginLeft: "calc(var(--ring) * -0.42)", paddingLeft: "calc(var(--ring) * 0.58)" }}
             >
               {profile.location} · {profile.relocation}
@@ -82,13 +82,13 @@ export function ContactSection() {
           </Chapter>
           <h2
             id="contact-title"
-            className="fx-reveal mt-3 whitespace-nowrap font-dot text-[clamp(40px,8vw,104px)] font-black leading-[1.12] tracking-[-0.04em] text-copy-primary max-md:tracking-[-0.08em]"
+            className="fx-reveal t-display mt-5"
             style={d(0.12)}
           >
             Get in touch
           </h2>
           <p
-            className="fx-reveal mt-5 max-w-[min(500px,92%)] text-[clamp(15px,1.55vw,18px)] leading-[1.55] text-[#d0d6e2]/80"
+            className="fx-reveal t-lead mt-5 max-w-[min(500px,92%)]"
             style={d(0.28)}
           >
             Based in {profile.location} and open to relocation. The fastest way to reach me is email.
@@ -97,14 +97,14 @@ export function ContactSection() {
           <div className="fx-reveal mt-9 flex flex-wrap items-center justify-center gap-3" style={d(0.4)}>
             <a
               href={`mailto:${profile.email}`}
-              className="ops-glow rounded-full bg-accent px-7 py-3 text-[14.5px] font-semibold text-ink-base"
+              className="ops-glow rounded-full bg-accent px-7 py-3 text-sm font-semibold text-ink-base"
             >
               Email me
             </a>
             <button
               type="button"
               onClick={copy}
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-ink-raised/70 px-5 py-3 text-[14px] text-copy-secondary backdrop-blur transition-colors hover:text-copy-primary"
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-ink-raised/70 px-5 py-3 text-sm text-copy-secondary backdrop-blur transition-colors hover:text-copy-primary"
             >
               {copied ? <Check aria-hidden="true" className="h-4 w-4" /> : <Copy aria-hidden="true" className="h-4 w-4" />}
               <span aria-live="polite">{copied ? "Copied" : profile.email}</span>
@@ -113,16 +113,14 @@ export function ContactSection() {
         </div>
 
         <div className="mt-16 w-full">
-          <h3 className="fx-reveal mb-5 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-copy-muted" style={d(0.45)}>
+          <h3 className="fx-reveal t-label mb-5 text-center text-copy-muted" style={d(0.45)}>
             Open to
           </h3>
           <ul className="grid w-full grid-cols-2 gap-6 md:grid-cols-4">
             {OPEN_TO.map((item, i) => (
               <li key={item} className="fx-reveal flex flex-col items-center text-center" style={d(0.5 + i * 0.08)}>
-                <span aria-hidden="true" className="font-dot text-[clamp(22px,3vw,33px)] font-black leading-none text-copy-primary">
-                  {GLYPHS[i]}
-                </span>
-                <span className="mt-3 text-[clamp(12px,1.2vw,13.5px)] leading-5 text-copy-secondary">{item}</span>
+                <IconBadge icon={ICONS[i]} />
+                <span className="t-small mt-4">{item}</span>
               </li>
             ))}
           </ul>
